@@ -34,12 +34,27 @@ int main(void){
 			  }
            }
        
-        cJSON *courses=cJSON_GetObjectItem(root,"courses");
-        if(cJSON_IsArray(courses)){
-            printf("found courses successfully\n");
+       cJSON *courses=cJSON_GetObjectItem(root,"courses");
+           if(cJSON_IsArray(courses)){
+           printf("found courses successfully\n");
 		}
+    
+       int size=cJSON_GetArraySize(courses);
+           for(int i=0;i<size;i++){
+           cJSON *course=cJSON_GetArrayItem(courses,i);
+           cJSON *nameofcourse=cJSON_GetObjectItem(course,"name");
+           cJSON *scoreofcourse=cJSON_GetObjectItem(course,"score");
+           if(cJSON_IsString(nameofcourse)&&cJSON_IsNumber(scoreofcourse)){
+           	    printf("course:%s,score:%d\n",nameofcourse->valuestring,scoreofcourse->valueint);
+		   }
+		}
+        
+
 
 cJSON_Delete(root);
 return 0;
 
 }  
+
+
+
