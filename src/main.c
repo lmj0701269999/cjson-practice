@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include "cJSON.h"
 
-int main(void)
-{
+int main(void){
     const char *xiangmu1=
     "{\n"
         "  \"student\": {\n"
@@ -21,8 +20,8 @@ int main(void)
 
        cJSON *root=cJSON_Parse(xiangmu1);
        if(root==NULL){
-       printf("failed\n");
-       return 1;
+            printf("failed\n");
+            return 1;
 	   }else{
               printf("success\n");
               cJSON *student=cJSON_GetObjectItem(root,"student");
@@ -34,8 +33,13 @@ int main(void)
              	
 			  }
            }
+       
+        cJSON *courses=cJSON_GetObjectItem(root,"courses");
+        if(cJSON_IsArray(courses)){
+            printf("found courses successfully\n");
+		}
 
 cJSON_Delete(root);
 return 0;
 
-}
+}  
